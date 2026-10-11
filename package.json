@@ -1,0 +1,13 @@
+{
+  "name": "historinhas-da-manu",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Uma biblioteca de contos ilustrados, animados e interativos para a Manu.",
+  "scripts": {
+    "dev": "node scripts/build.mjs && node scripts/serve.mjs",
+    "build": "node scripts/build.mjs",
+    "check": "node --check src/app.js && node --check src/stories.js && node --check src/scenes.js && node --check src/scene-anchors.js && node --check src/scene-layout.js && node --check src/art.js && node --check src/coloring.js && node --check src/life.js && node scripts/verify.mjs",
+    "start": "node scripts/serve.mjs"
+  }
+}

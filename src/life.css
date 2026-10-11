@@ -1,0 +1,58 @@
+.drawing-life-stage{position:fixed;inset:0;z-index:100;pointer-events:auto;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;overflow:hidden;contain:strict;isolation:isolate}
+.drawing-life-stage>canvas{position:absolute;inset:0;pointer-events:none}
+.drawing-life-stage>canvas{z-index:2}
+.drawing-life-close{position:absolute;top:max(18px,env(safe-area-inset-top));right:max(18px,env(safe-area-inset-right));z-index:4;pointer-events:auto;min-height:52px;min-width:148px;padding:13px 19px;border-radius:18px;background:#fffefa;color:#4c5a42;border:1px solid #cfbd9c;box-shadow:0 4px 16px #72634114;font-size:14px;line-height:1.5}
+.drawing-life-close:focus-visible{outline:3px solid #ad744e;outline-offset:4px}
+.drawing-life-caption{position:absolute;top:max(18px,env(safe-area-inset-top));left:50%;z-index:2;transform:translateX(-50%);box-sizing:border-box;width:max-content;max-width:calc(100% - 2*(148px + 36px));margin:0;padding:12px 20px;border-radius:18px;background:#fffefa;color:#80623e;border:1px solid #cfbd9c;box-shadow:0 4px 16px #72634114;font:italic 17px/1.35 var(--serif,Georgia,serif);text-align:center;pointer-events:none}
+.drawing-life-creature{z-index:3}
+.drawing-life-ground-shadow{z-index:1}
+.drawing-life-scenery{position:absolute;inset:0;z-index:0;pointer-events:none}
+.drawing-life-backdrop{position:absolute;inset:0;background:linear-gradient(#f5eee0 0%,#faf5e9 63%,#e9efd9 100%);opacity:0}
+.scenery-night .drawing-life-backdrop,.scenery-space .drawing-life-backdrop{background:linear-gradient(#e1e1f1,#f1e9ee 70%,#ece5d6)}
+.scenery-underwater .drawing-life-backdrop{background:linear-gradient(#e5f5f3,#d8eeed 65%,#f2e8d6)}
+.scenery-room .drawing-life-backdrop{background:linear-gradient(#f7eee9,#faf4e9 65%,#efe2d1)}
+.drawing-life-scenery-part{position:absolute;top:0;left:0;opacity:0;will-change:transform;filter:drop-shadow(0 3px 3px #7263410d)}
+.drawing-life-scenery-paint{display:block;width:100%;height:100%}
+.drawing-life-scenery-lines{position:absolute;inset:0;width:100%;height:100%;fill:none;stroke:#817b68;stroke-width:.65;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
+.drawing-life-articulated{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;will-change:transform;backface-visibility:visible}
+.drawing-life-castle .drawing-life-model{filter:drop-shadow(0 0 8px #dcb6753d) drop-shadow(0 5px 5px #493a271c)}
+@media(prefers-reduced-motion:reduce){.drawing-life-scenery-part,.drawing-life-articulated{will-change:auto}}
+.drawing-life-creature{position:absolute;top:0;left:0;will-change:transform;transform-origin:center;perspective:800px;opacity:0}
+.drawing-life-model{position:absolute;inset:0;transform-origin:50% 54%;transform-style:preserve-3d;filter:drop-shadow(0 9px 8px rgba(73,58,39,.16)) drop-shadow(0 1px 1px rgba(73,58,39,.10));will-change:transform}
+.drawing-life-paint,.drawing-life-wing,.drawing-life-fish-tail,.drawing-life-flower-blossom{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;backface-visibility:visible}
+.drawing-life-aura{position:absolute;inset:4%;border-radius:50%;background:radial-gradient(ellipse,rgba(255,239,192,.34),rgba(255,247,223,.14) 40%,transparent 70%);transform:scale(1.5);opacity:.22;pointer-events:none}
+.drawing-life-wing{transform-origin:50% 54%;will-change:transform}
+.drawing-life-wing-left{clip-path:polygon(0 0,50% 0,50% 100%,0 100%)}
+.drawing-life-wing-right{clip-path:polygon(50% 0,100% 0,100% 100%,50% 100%)}
+.drawing-life-butterfly-body{position:absolute;inset:0;transform:translateZ(2px);filter:drop-shadow(0 1px 1px rgba(73,58,39,.13))}
+.drawing-life-butterfly-body svg{display:block;width:100%;height:100%;overflow:visible}
+.drawing-life-fish-body{clip-path:polygon(0 0,78% 0,78% 100%,0 100%)}
+.drawing-life-fish-tail{clip-path:polygon(76% 0,100% 0,100% 100%,76% 100%);transform-origin:76% 50%;will-change:transform}
+.drawing-life-flower-stem{clip-path:polygon(0 64%,100% 64%,100% 100%,0 100%)}
+.drawing-life-flower-blossom{clip-path:polygon(0 0,100% 0,100% 65%,0 65%);transform-origin:50% 44%;will-change:transform}
+.drawing-life-star .drawing-life-aura{inset:-14%;background:radial-gradient(ellipse,rgba(255,234,166,.54),rgba(255,235,179,.18) 38%,transparent 68%)}
+.drawing-life-star .drawing-life-model{filter:drop-shadow(0 0 8px rgba(241,207,119,.50)) drop-shadow(0 9px 8px rgba(73,58,39,.12))}
+.drawing-life-heart .drawing-life-aura{background:radial-gradient(ellipse,rgba(232,159,184,.22),transparent 65%)}
+.drawing-life-fish .drawing-life-aura{background:radial-gradient(ellipse,rgba(151,209,216,.2),transparent 66%)}
+.drawing-life-ground-shadow{position:absolute;left:0;top:0;height:15px;border-radius:50%;background:radial-gradient(ellipse,rgba(78,65,48,.7),rgba(78,65,48,.12) 55%,transparent 75%);filter:blur(4px);transform-origin:center;will-change:transform,opacity}
+@media(prefers-reduced-motion:reduce){.drawing-life-model,.drawing-life-wing,.drawing-life-fish-tail,.drawing-life-flower-blossom{will-change:auto}}
+.paint-paper.alive .canvas-holder{animation:none!important;transform:none!important;opacity:.32;transition:opacity .4s}
+.paint-paper.alive .alive-caption{opacity:0}
+.drawing-life-bee-wings,.drawing-life-bee-body,.drawing-life-bird-wing,.drawing-life-kite-tail,.drawing-life-turtle-foot,.drawing-life-snail-body,.drawing-life-snail-shell,.drawing-life-snail-antennae{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;backface-visibility:visible;will-change:transform}
+.drawing-life-bee-wings{transform-origin:50% 40%;filter:drop-shadow(0 1px 2px rgba(139,169,185,.18))}
+.drawing-life-bee-body{transform:translateZ(1px)}
+.drawing-life-bird-wing{transform-origin:35% 53%;filter:drop-shadow(0 2px 1px rgba(92,75,51,.09))}
+.drawing-life-rocket-flame{position:absolute;left:44%;top:76%;width:12%;height:23%;border-radius:46% 46% 55% 55%;background:linear-gradient(#fff7d1 8%,#f0d391 42%,#eeb06e 75%,rgba(238,176,110,0));filter:drop-shadow(0 0 5px rgba(240,193,111,.32));transform-origin:50% 0;will-change:transform}
+.drawing-life-rocket-flame span{display:block;margin:0 auto;width:48%;height:70%;border-radius:50%;background:linear-gradient(#fffefa,#ffecc3,transparent)}
+.drawing-life-rocket .drawing-life-aura{background:radial-gradient(ellipse,rgba(239,198,125,.15),transparent 68%)}
+.drawing-life-kite-canopy{clip-path:polygon(0 0,100% 0,100% 71%,0 71%)}
+.drawing-life-kite-tail{transform-origin:50% 71%}
+.drawing-life-turtle-shell{clip-path:polygon(0 0,100% 0,100% 73%,0 73%)}
+.drawing-life-turtle-foot-back{transform-origin:33% 73%}
+.drawing-life-turtle-foot-front{transform-origin:59% 73%}
+.drawing-life-turtle .drawing-life-model,.drawing-life-snail .drawing-life-model{filter:drop-shadow(0 3px 3px rgba(73,58,39,.12))}
+.drawing-life-snail-body{transform-origin:77% 71%}
+.drawing-life-snail-shell{transform-origin:40% 64%;filter:drop-shadow(0 2px 1px rgba(73,58,39,.08))}
+.drawing-life-snail-antennae{transform-origin:84% 56%}
+.drawing-life-bird .drawing-life-aura{background:radial-gradient(ellipse,rgba(166,204,221,.18),transparent 66%)}
+.drawing-life-kite .drawing-life-aura{background:radial-gradient(ellipse,rgba(189,171,216,.17),transparent 66%)}

@@ -1,0 +1,25 @@
+/* Low contrast atmosphere. The painting stays visible; no character overlays. */
+.scene-atmosphere { position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:1; border-radius:inherit; contain:paint; }
+.scene-atmosphere-element { position:absolute; left:var(--scene-x); top:var(--scene-y); display:block; animation-delay:var(--scene-delay); animation-duration:var(--scene-duration); animation-iteration-count:infinite; animation-timing-function:ease-in-out; will-change:transform,opacity; }
+.scene-atmosphere--water .scene-atmosphere-element { width:11%; height:9px; border-top:1px solid #fff7dba6; border-bottom:1px solid #d4f1f276; border-radius:50%; opacity:.3; animation-name:scene-water; }
+.scene-atmosphere--breeze .scene-atmosphere-element,
+.scene-atmosphere--wind .scene-atmosphere-element { width:7px; height:3px; border-radius:90% 10% 80% 20%; background:#dde5ada8; opacity:.3; animation-name:scene-leaf; }
+.scene-atmosphere--wind .scene-atmosphere-element { animation-duration:calc(var(--scene-duration) * .65); }
+.scene-atmosphere--flutters .scene-atmosphere-element { width:4px; height:7px; background:#f1d2ce9c; border-radius:80% 20% 60% 40%; opacity:.35; animation-name:scene-petal; }
+.scene-atmosphere--clouds .scene-atmosphere-element { width:13%; height:15px; background:#fff6e922; border-radius:50%; filter:blur(7px); animation-name:scene-cloud; }
+.scene-atmosphere--nightstars .scene-atmosphere-element { width:3px; height:3px; border-radius:50%; background:#fff3c9; box-shadow:0 0 5px 2px #ffebba38; opacity:.3; animation-name:scene-light; }
+.scene-atmosphere--sparkles .scene-atmosphere-element { width:3px; height:3px; border-radius:50%; background:#ffedbd; box-shadow:0 0 7px 2px #ffe9b934; opacity:.2; animation-name:scene-firefly; }
+.scene-atmosphere--warm .scene-atmosphere-element { width:4px; height:4px; border-radius:50%; background:#fff0cb; filter:blur(1px); opacity:.15; animation-name:scene-firefly; }
+.scene-atmosphere--hearth .scene-atmosphere-element { width:24px; height:12px; border-radius:50%; background:#ffd99b24; filter:blur(8px); opacity:.2; animation-name:scene-hearth; }
+@keyframes scene-water { 0%,100% { opacity:.14; transform:translateX(-6px) scaleX(.88); } 50% { opacity:.4; transform:translateX(6px) scaleX(1.12); } }
+@keyframes scene-leaf { 0%,100% { opacity:0; transform:translate(0,-4px) rotate(-15deg); } 30%,70% { opacity:.35; } 85% { transform:translate(var(--scene-drift),19px) rotate(70deg); } }
+@keyframes scene-petal { 0%,100% { opacity:.08; transform:translate(0,0) rotate(0); } 50% { opacity:.35; transform:translate(var(--scene-drift),12px) rotate(45deg); } }
+@keyframes scene-cloud { 0%,100% { opacity:.2; transform:translateX(-10px); } 50% { opacity:.4; transform:translateX(16px); } }
+@keyframes scene-light { 0%,100% { opacity:.13; transform:scale(.75); } 45% { opacity:.65; transform:scale(1.1); } }
+@keyframes scene-firefly { 0%,100% { opacity:.07; transform:translate(0,5px); } 45% { opacity:.5; transform:translate(var(--scene-drift),-9px); } 70% { opacity:.2; } }
+@keyframes scene-hearth { 0%,100% { opacity:.15; transform:scale(.9); } 50% { opacity:.4; transform:scale(1.15); } }
+@media (prefers-reduced-motion:reduce) { .scene-atmosphere-element { animation:none; will-change:auto; opacity:.12; } }
+[data-reduced-motion="true"] .scene-atmosphere-element,
+[data-motion="reduced"] .scene-atmosphere-element,
+[data-motion="false"] .scene-atmosphere-element { animation:none; will-change:auto; opacity:.12; }
+.reduce-motion .scene-atmosphere-element { animation:none; will-change:auto; opacity:.12; }

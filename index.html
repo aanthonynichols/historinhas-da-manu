@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Manu">
+    <meta name="theme-color" content="#fbf8f1">
+    <meta name="description" content="Um mundo de historinhas para a Manu: livros ilustrados, animações e pequenas descobertas a cada toque.">
+    <title>Historinhas da Manu · Era uma vez…</title>
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="apple-touch-icon" href="/assets/app-icon-180.png">
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+    <script>
+      // Only the library shows the hero; a deep link into a book or the Ateliê must not download it.
+      if (['', '#', '#/'].includes(location.hash)) {
+        const hero = Object.assign(document.createElement('link'), { rel: 'preload', as: 'image', href: '/assets/hero-biblioteca.webp' });
+        hero.setAttribute('fetchpriority', 'high');
+        document.head.append(hero);
+      }
+    </script>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/coloring.css">
+    <link rel="stylesheet" href="/life.css">
+    <link rel="stylesheet" href="/scenes.css">
+    <script>
+      // A refreshed document can still begin under the previous offline worker.
+      // Adopt the new shell once its complete cache has activated, but only where nothing is lost:
+      // the library without an open dialog, or a hidden page, while app.js reports nothing to keep (narration,
+      // fullscreen, music). A book keeps its narration, fullscreen and dialogs; the Ateliê keeps its painting. The old modules keep working until then.
+      if ('serviceWorker' in navigator) {
+        let controlled = Boolean(navigator.serviceWorker.controller);
+        let updatePending = false;
+        const adoptUpdate = () => {
+          if (!updatePending || location.hash.startsWith('#/pintar/')) return;
+          const library = ['', '#', '#/'].includes(location.hash) && !document.querySelector('dialog[open]');
+          // The flag stays set: Safari may drop a reload requested by a hidden page.
+          if ((library || document.hidden) && !window.__manuKeep?.()) location.reload();
+        };
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+          if (controlled) {
+            updatePending = true;
+            // Closing a dialog removes it from body; that is the moment the library becomes safe.
+            if (document.body) new MutationObserver(adoptUpdate).observe(document.body, { childList: true });
+            adoptUpdate();
+          }
+          controlled = true;
+        });
+        // Runs after the app's own hashchange handler has closed any dialog.
+        addEventListener('hashchange', () => setTimeout(adoptUpdate));
+        document.addEventListener('visibilitychange', adoptUpdate);
+      }
+    </script>
+    <script type="module" src="/app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Pular para as histórias</a>
+    <div id="app"></div>
+    <div id="announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+    <noscript><main><h1>Historinhas da Manu</h1><p>Ative o JavaScript no navegador para abrir os livros e brincar com as histórias.</p></main></noscript>
+  </body>
+</html>
